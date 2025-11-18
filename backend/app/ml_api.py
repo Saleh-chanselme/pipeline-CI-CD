@@ -52,8 +52,8 @@ def predict(req: PredictRequest):
         data = pd.DataFrame([req.features])
         logger.info(f"Received data for prediction: {req.features}")
         predictions = model.predict(data)
-        logger.info(f"Prediction result : {predictions.to_list()}")
-        return {"predictions": predictions.to_list()}
+        logger.info(f"Prediction result : {predictions.tolist()}")
+        return {"predictions": predictions.tolist()}
     except Exception as e:
         logger.error(f"Error during prediction {e}")
         raise HTTPException(status_code=500, detail=str(e))
