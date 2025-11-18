@@ -1,0 +1,6 @@
+site_name: Pipeline CI/CD
+
+nav:
+  - Home: index.md
+  - API Documentation: api.md
+  - Model Documentation: model.md
