@@ -55,11 +55,15 @@ def predict(req: PredictRequest):
     if model is None:
         logger.error("Prediction requested but model is not loaded")
         raise HTTPException("No model found !")
+
     try:
-        data = pd.DataFrame([req.features])
+        columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
+        data = pd.DataFrame([req.features], columns=columns)
+
         logger.info(f"Received data for prediction: {req.features}")
         predictions = model.predict(data)
-        logger.info(f"Prediction result : {predictions.tolist()}")
+
+        logger.info(f"Prediction result: {predictions.tolist()}")
         return {"predictions": predictions.tolist()}
     except Exception as e:
         logger.error(f"Error during prediction {e}")
