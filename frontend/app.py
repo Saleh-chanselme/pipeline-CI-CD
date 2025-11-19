@@ -43,9 +43,9 @@ if st.button("Predict"):
         else:
             st.error(f"API Error: {response.text}")
             logger.error(f"API error: {response.text}")
-    # except ValueError:
-    #     st.error("Please enter valid numeric values for all features.")
-    #     logger.error("Features values are not valid")
+    except ValueError:
+        st.error("Please enter valid numeric values for all features.")
+        logger.error("Features values are not valid")
     except requests.exceptions.RequestException as e:
         st.error(f"Cannot reach API: {e}")
         logger.error(f"can not reach api {e}")
