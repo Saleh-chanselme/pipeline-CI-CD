@@ -4,11 +4,11 @@ import logging
 from dotenv import load_dotenv
 import os
 
-logger = logging.basicConfig(level=logging.INFO, filename="app.log")
+logging.basicConfig(level=logging.INFO, filename="app.log")
 logger = logging.getLogger(__name__)
 
 load_dotenv()
-API_URL = os.getenv("API_URL")
+API_URL = os.getenv("API_URL", "http://localhost:8000/predict")
 
 logger.info("App started")
 st.title("Welcome to our application")
