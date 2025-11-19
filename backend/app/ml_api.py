@@ -5,12 +5,23 @@ import mlflow.pyfunc
 import logging
 import pandas as pd
 from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
 
 logging.basicConfig(level=logging.INFO, filename="app.log")
 logger = logging.getLogger(__name__)
 logger.info("App Started")
 
+
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://pipeline-frontend.azurewebsites.net"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class PredictRequest(BaseModel):
