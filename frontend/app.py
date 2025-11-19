@@ -8,7 +8,7 @@ logger = logging.basicConfig(level=logging.INFO, filename="app.log")
 logger = logging.getLogger(__name__)
 
 load_dotenv()
-API_URL = os.getenv("API_URL", "http://localhost:8000/predict")
+API_URL = os.getenv("API_URL")
 
 logger.info("App started")
 st.title("Welcome to our application")
