@@ -1,0 +1,52 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Logs
+*.log
+
+# Cache
+.cache/
+*.egg-info/
+pip-wheel-metadata/
+
+# System files
+.DS_Store
+
+# Python compiled files
+*.so
+
+# Debug files
+*.swp
+*.swo
+
+# Tests outputs
+coverage/
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
+# Git
+.git/
+.gitignore
+
+# Data
+*.csv
+*.xlsx
+*.json
+*.pkl
+*.h5
+*.db
+
+# Model artifacts (if you download them externally)
+mlruns/
+mlartifacts/
