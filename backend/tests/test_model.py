@@ -1,26 +1,13 @@
+import os
 import mlflow.pyfunc
-import pandas as pd
-from sklearn import datasets
 
-MODEL_DIR = "model"
+MODEL_DIR = os.path.join(os.path.dirname(__file__), "../model_local")
 
 
 def test_loaded_model():
     loaded_model = mlflow.pyfunc.load_model(MODEL_DIR)
-
-    X, y = datasets.load_iris(return_X_y=True)
-    feature_names = datasets.load_iris().feature_names
-
-    df = pd.DataFrame(X, columns=feature_names)
-
-    preds = loaded_model.predict(df)
-    result = df.copy()
-    result["actual"] = y
-    result["predicted"] = preds
-
-    print(result.head())
-    print("\nTest completed successfully!")
-
-
-if __name__ == "__main__":
-    test_loaded_model()
+    input_data = [[5.1, 3.5, 1.4, 0.2], [6.2, 2.8, 4.8, 1.8]]
+    predictions = loaded_model.predict(input_data).tolist()
+    assert isinstance(predictions, list)
+    assert len(predictions) == len(input_data)
+    assert all(isinstance(x, (int, float)) for x in predictions)
