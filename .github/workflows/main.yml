@@ -37,7 +37,7 @@ jobs:
         run: pip install mkdocs mkdocs-material
 
       - name: Deploy Documentation
-        working-directory: ./docs
+        working-directory: docs/pipline-ci-cd
         run: mkdocs gh-deploy --force
 
       - name: Log in to DockerHub
