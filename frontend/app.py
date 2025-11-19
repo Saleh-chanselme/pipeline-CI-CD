@@ -8,8 +8,7 @@ logging.basicConfig(level=logging.INFO, filename="app.log")
 logger = logging.getLogger(__name__)
 
 load_dotenv()
-API_URL = os.getenv("BACKEND_URL", "http://localhost:8000") + "/predict"
-logger.info(f"Using API URL: {API_URL}")
+API_URL = os.getenv("BACKEND_URL", "http://localhost:8000/predict")
 
 logger.info("App started")
 st.title("Welcome to our application")
@@ -43,9 +42,9 @@ if st.button("Predict"):
         else:
             st.error(f"API Error: {response.text}")
             logger.error(f"API error: {response.text}")
-    except ValueError:
-        st.error("Please enter valid numeric values for all features.")
-        logger.error("Features values are not valid")
+    # except ValueError:
+    #     st.error("Please enter valid numeric values for all features.")
+    #     logger.error("Features values are not valid")
     except requests.exceptions.RequestException as e:
         st.error(f"Cannot reach API: {e}")
         logger.error(f"can not reach api {e}")
