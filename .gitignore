@@ -220,3 +220,4 @@ backend/model/python_env.yaml
 .gitignore
 backend/model/MLmodel
 backend/model/requirements.txt
+.DS_Store

@@ -4,7 +4,7 @@ import mlflow
 import mlflow.pyfunc
 import logging
 import pandas as pd
-
+from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, filename="app.log")
 logger = logging.getLogger(__name__)
@@ -14,27 +14,23 @@ app = FastAPI()
 
 
 class PredictRequest(BaseModel):
-    features: list
+    features: list[float]
 
 
-def load_mlflow_model(experiment_id: str):
+MODEL_DIR = Path("model_local")
+
+
+def load_local_mlflow_model(model_path):
     try:
-        client = mlflow.MlflowClient()
-        runs = client.search_runs(
-            experiment_ids=[experiment_id], order_by=["start_time DESC"], max_results=1
-        )
-        latest_run = runs[0]
-        run_id = latest_run.info.run_id
-        model_uri = f"runs:/{run_id}/model"
-        model = mlflow.pyfunc.load_model(model_uri)
-        logger.info(f"Model loaded successfully from MLflow: run_id={run_id}")
+        model = mlflow.pyfunc.load_model(MODEL_DIR)
+        logger.info(f"Model loaded successfully from local path: {model_path}")
         return model
     except Exception as e:
-        logger.error(f"Error loading model from MLflow: {e}")
+        logger.error(f"Error loading local MLflow model: {e}")
         return None
 
 
-model = load_mlflow_model("399503080388943605")
+model = load_local_mlflow_model("../model/")
 
 
 @app.get("/")
