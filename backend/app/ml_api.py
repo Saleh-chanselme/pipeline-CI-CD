@@ -6,6 +6,9 @@ import logging
 import pandas as pd
 from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+import os
+
 
 logging.basicConfig(level=logging.INFO, filename="app.log")
 logger = logging.getLogger(__name__)
@@ -14,10 +17,15 @@ logger.info("App Started")
 
 app = FastAPI()
 
-
+load_dotenv()
+FRONT_END = os.getenv("FRONT_END")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://pipeline-frontend.azurewebsites.net"],
+    allow_origins=[
+        "http://localhost:8501",
+        "http://127.0.0.1:8501",
+        FRONT_END,
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
