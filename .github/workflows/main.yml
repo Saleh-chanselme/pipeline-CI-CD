@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - ml-tracking
+      - main
 
 jobs:
   build-and-deploy:
